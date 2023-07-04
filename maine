@@ -1,0 +1,217 @@
+local modified = {}
+local invis = function() 
+    for i, v in pairs(game.Workspace:GetDescendants()) do 
+        if v:IsA("BasePart") and v.Transparency ~= 1 then 
+            v.Transparency = 1 
+            table.insert(modified, v)
+        end
+        end
+end
+local uninvis = function()
+    for i, v in pairs(workspace:GetDescendants()) do 
+    if v:IsA("BasePart") then 
+        v.Transparency = 0
+    end
+    end
+    modified = {}
+end
+local fastcustomers = false 
+local fastcooks = false 
+local fastwaiters = false
+local customers = function()
+for i, v in pairs(game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.CustomerContainer:GetChildren()) do 
+    if v:FindFirstChildOfClass("Humanoid") and fastcustomers == true then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+    elseif fastcustomers == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastcustomers == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 100
+            else 
+                con:Disconnect()
+            end
+            end)
+    end
+end
+local con = game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.CustomerContainer.ChildAdded:Connect(function(v)
+    if v:FindFirstChildOfClass("Humanoid") and fastcustomers == true then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastcustomers == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 100
+            else 
+                con:Disconnect()
+            end
+            end)
+    elseif fastcustomers == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+        con:Disconnect()
+    end
+end)
+end
+
+local cook = function()
+for i, v in pairs(game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.CookContainer:GetChildren()) do 
+    if v:FindFirstChildOfClass("Humanoid") and fastcooks == true then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+    elseif fastcooks == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastcooks == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 100
+            else 
+                con:Disconnect()
+            end
+            end)
+    end
+end
+
+local con = game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.CookContainer.ChildAdded:Connect(function(v)
+    if v:FindFirstChildOfClass("Humanoid") and fastcooks == true then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastcooks == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+            else 
+                con:Disconnect()
+            end
+            end)
+    elseif fastcooks == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+        con:Disconnect()
+    end
+end)
+end
+local waiter = function()
+for i, v in pairs(game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.WaiterContainer:GetChildren()) do 
+    if v:FindFirstChildOfClass("Humanoid") and fastwaiters == true then 
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastwaiters == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+            else 
+                con:Disconnect()
+            end
+            end)
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+    elseif fastwaiters == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+    end
+end
+local con = game:GetService("Workspace")["__THINGS"].BAKERIES[game.Players.LocalPlayer.Name].Floor1.WaiterContainer.ChildAdded:Connect(function(v)
+    if v:FindFirstChildOfClass("Humanoid") and fastwaiters == true then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+        local con = v:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if fastwaiters == true then 
+                v:FindFirstChildOfClass("Humanoid").WalkSpeed = 120
+            else 
+                con:Disconnect()
+            end
+            end)
+    elseif fastwaiters == false and v:FindFirstChildOfClass("Humanoid") then 
+        v:FindFirstChildOfClass("Humanoid").WalkSpeed = 12
+        con:Disconnect()
+    end
+end)
+end
+local mult = 5
+local fastlevel = false
+local hook
+local stuff = {}
+local fmwlkmofgkweg = function(a, b)
+     local c = 0
+
+     spawn(function()
+          while wait() do 
+               c += 1 
+               if c <= 60 then
+          local args = {
+              [1] = {
+                  [1] = a
+              }
+          }
+          
+          workspace:WaitForChild("__THINGS"):WaitForChild("__REMOTES"):WaitForChild(b):FireServer(unpack(args))
+          
+     end
+     end
+      end)
+end
+hook = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+    local Args = {...}
+   
+    local method = getnamecallmethod()
+    if not checkcaller() and self.Name == "awardcookexperienceforcompletingorderwithverification" or self.Name == "awardwaiterexperiencefortakingorderwithverification" or self.Name == "awardwaiterexperiencefordeliveringorderwithverification" and method == "FireServer" and fastlevel == true then
+     if not table.find(stuff, Args[1][1]) then
+     table.insert(stuff, Args[1][1])
+     fmwlkmofgkweg(Args[1][1], self.Name)     
+end
+        return hook(self, table.unpack(Args));
+
+    end
+    return hook(self, ...)
+    
+end))
+
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+local Window = Rayfield:CreateWindow({
+	Name = "My restraunt",
+	LoadingTitle = "my restraunt",
+	LoadingSubtitle = "by wowzers!#0560",
+	ConfigurationSaving = {
+		Enabled = false,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "sirius", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	KeySystem = false, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Sirius Hub",
+		Subtitle = "Key System",
+		Note = "Join the discord (discord.gg/sirius)",
+		FileName = "SiriusKey",
+		SaveKey = true,
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = "Hello"
+	}
+})
+local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
+local Toggle = Tab:CreateToggle({
+	Name = "Fast Customers",
+	CurrentValue = false,
+	Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+fastcustomers = Value
+customers()
+	end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "Fast Chefs",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+fastcooks = Value
+cook()
+	end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "Fast Waiters",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+	fastwaiters = Value
+        waiter()
+	end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "60x Xp (can kick)",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+fastlevel = true
+
+end,
+})
